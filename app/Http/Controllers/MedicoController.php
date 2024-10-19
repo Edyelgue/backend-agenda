@@ -27,7 +27,7 @@ class MedicoController extends Controller
             'obs' => $request->obs
         ]);
 
-        return response(['Ok'], 200);
+        return response(['Sucesso!'], 200);
     }
 
     public function show($id)
@@ -38,7 +38,8 @@ class MedicoController extends Controller
 
         // Verifica se o medico foi encontrado
         if (!$medico) {
-            return response()->json(['message' => 'Medico não encontrado'], 404);
+            return response()->json(
+                ['message' => 'Não encontrado'], 404);
         }
 
         // Retorna o medico em formato JSON
@@ -60,7 +61,7 @@ class MedicoController extends Controller
 
         $medico->save();
 
-        return response('Editado com sucesso!', 200);
+        return response('Sucesso!', 200);
     }
 
     public function soft_delete(Request $request)
@@ -72,7 +73,7 @@ class MedicoController extends Controller
 
         $medico->save();
 
-        return response('Removido com sucesso!', 200);
+        return response('Removido!', 200);
     }
 
     public function destroy($id)
@@ -81,6 +82,6 @@ class MedicoController extends Controller
         $medico = Medico::find($id);
         $medico->delete();
 
-        return response('Removido com sucesso!', 200);
+        return response('Removido!', 200);
     }
 }

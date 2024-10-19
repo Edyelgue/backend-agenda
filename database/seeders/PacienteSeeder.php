@@ -2,19 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\Paciente;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\MedicoFactory;
-use App\Models\Medico;
 
-class MedicoSeeder extends Seeder
+class PacienteSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        // Cria 50 médicos aleatórios
-        Medico::factory()->count(10)->create();
+        Paciente::factory()->count(10)->create();
     }
 }
