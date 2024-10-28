@@ -1,86 +1,77 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 
-// Login
-Route::post('/login', function (Request $request) {
-    $credenciais = $request->only('email', 'password');
+// Criar Usuários
+Route::post('/usuarios', [
+    UserController::class,
+    'store'
+]);
 
-    if (Auth::attempt($credenciais)) {
-        $user = $request->user();
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json([
-            "access_token" => $token,
-            "token_type" => 'Bearer'
-        ]);
-    }
-
-    return response()->json([
-        "message" => "Usuário ou senha inválida."
-    ]);
-});
+// Realizar Login
+Route::post('/login', [
+    AuthController::class,
+    'login'
+]);
 
 // Rotas protegidas por autenticação Sanctum
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(
+    'auth:sanctum'
+)->group(
+    function () {
 
-    // Medicos
-    Route::get('/medicos', [
-        MedicoController::class,
-        'index'
-    ]);
-    Route::get('/medicos/{id}', [
-        MedicoController::class,
-        'show'
-    ]);
-    Route::post('/medicos', [
-        MedicoController::class,
-        'store'
-    ]);
-    Route::put('/medicos/{id}', [
-        MedicoController::class,
-        'update'
-    ]);
-    Route::put('/medicos/{id}', [
-        MedicoController::class,
-        'soft_delete'
-    ]);
-    Route::delete('/medicos/{id}', [
-        MedicoController::class,
-        'destroy'
-    ]);
+        // Usuarios
+        Route::get('/usuarios', [
+            UserController::class,
+            'index'
+        ])->name('usuarios.index');
 
-    // Pacientes
-    Route::get('/pacientes', [
-        PacienteController::class,
-        'index'
-    ]);
-    Route::get('/pacientes/{id}', [
-        PacienteController::class,
-        'show'
-    ]);
-    Route::post('/pacientes', [
-        PacienteController::class,
-        'store'
-    ]);
-    Route::put('/pacientes/{id}', [
-        PacienteController::class,
-        'update'
-    ]);
-    Route::delete('/pacientes/{id}', [
-        PacienteController::class,
-        'destroy'
-    ]);
+        // Medicos
+        Route::get('/medicos', [
+            MedicoController::class,
+            'index'
+        ]);
+        Route::get('/medicos/{id}', [
+            MedicoController::class,
+            'show'
+        ]);
+        Route::post('/medicos', [
+            MedicoController::class,
+            'store'
+        ]);
+        Route::put('/medicos/{id}', [
+            MedicoController::class,
+            'update'
+        ]);
+        Route::delete('/medicos/{id}', [
+            MedicoController::class,
+            'destroy'
+        ]);
 
-    // Usuários
-    Route::post('/usuarios', [
-        UserController::class,
-        'store'
-    ]);
-});
+        // Pacientes
+        Route::get('/pacientes', [
+            PacienteController::class,
+            'index'
+        ]);
+        Route::get('/pacientes/{id}', [
+            PacienteController::class,
+            'show'
+        ]);
+        Route::post('/pacientes', [
+            PacienteController::class,
+            'store'
+        ]);
+        Route::put('/pacientes/{id}', [
+            PacienteController::class,
+            'update'
+        ]);
+        Route::delete('/pacientes/{id}', [
+            PacienteController::class,
+            'destroy'
+        ]);
+    }
+);

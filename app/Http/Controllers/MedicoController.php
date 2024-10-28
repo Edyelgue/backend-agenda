@@ -57,23 +57,12 @@ class MedicoController extends Controller
         $medico->telefone = $request->telefone;
         $medico->email = $request->email;
         $medico->endereco = $request->endereco;
+        $medico->status = $request->status;
         $medico->obs = $request->obs;
 
         $medico->save();
 
         return response('Sucesso!', 200);
-    }
-
-    public function soft_delete(Request $request)
-    {
-        // Atualiza um medico existente
-        $medico = Medico::find($request->id);
-
-        $medico->status = $request->status;
-
-        $medico->save();
-
-        return response('Removido!', 200);
     }
 
     public function destroy($id)

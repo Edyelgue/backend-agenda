@@ -15,6 +15,6 @@ class MedicoSeeder extends Seeder
     public function run(): void
     {
         // Cria 50 médicos aleatórios
-        Medico::factory()->count(10)->create();
+        Medico::factory()->count(5)->create();
     }
 }
