@@ -24,9 +24,7 @@ class AuthController extends Controller
                 ], 200); // Status 200 para sucesso
             } else {
                 // Retorna resposta caso as credenciais estejam incorretas
-                return response()->json([
-                    'message' => 'Usuário ou senha inválida.'
-                ], 401); // Status 401 para falha de autenticação
+                throw new AuthenticationException();
             }
         } catch (AuthenticationException $e) {
             // Retorna erro de autenticação personalizado
@@ -41,5 +39,8 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request) {}
+    public function logout(Request $request) 
+    {
+
+    }
 }
