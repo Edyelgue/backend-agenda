@@ -6,29 +6,40 @@ use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\UserController;
 
-// Criar Usuários
-Route::post('/usuarios', [
-    UserController::class,
-    'store'
-]);
 
 // Realizar Login
 Route::post('/login', [
     AuthController::class,
     'login'
-]);
+])->name('login');
+
 
 // Rotas protegidas por autenticação Sanctum
 Route::middleware(
     'auth:sanctum'
-)->group(
-    function () {
-
+    )->group(
+        function () {
+            
+        //  Realizar logout
+        Route::post('/logout', [
+            AuthController::class,
+            'logout'
+        ]);
+        
         // Usuarios
         Route::get('/usuarios', [
             UserController::class,
             'index'
         ])->name('usuarios.index');
+
+        Route::get('/usuarios', [
+            UserController::class, 'show'
+        ])->name('usuarios.show');
+
+        Route::post('/usuarios', [
+            UserController::class,
+            'store'
+        ])->name('usuarios.store');
 
         // Medicos
         Route::get('/medicos', [
