@@ -14,7 +14,17 @@ class UserController extends Controller
         return response()->json(User::all());
     }
 
-    // Create User
+    public function show($id)
+    {
+        $user = User::find($id);
+
+        if (!empty($user)) {
+            return response()->json($user);
+        } else {
+            return response()->json(['message' => 'Usuário não encontrado.'], 404);
+        }
+    }
+
     public function store(Request $request)
     {
         try {
@@ -31,5 +41,23 @@ class UserController extends Controller
             // Tratamento de exceção e retorno de mensagem de erro
             return back()->withErrors(['error' => 'Erro ao criar usuário. Tente novamente.']);
         }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $usuario = User::find($id);
+
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->password = $request->password;
+
+        $usuario->save();
+
+        return response('Sucesso.', 200);
+    }
+
+    public function destroy($id)
+    {
+
     }
 }

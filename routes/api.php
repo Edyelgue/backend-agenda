@@ -30,9 +30,9 @@ Route::middleware(
         Route::get('/usuarios', [
             UserController::class,
             'index'
-        ])->name('usuarios.index');
+        ]);
 
-        Route::get('/usuarios', [
+        Route::get('/usuarios/{id}', [
             UserController::class, 'show'
         ])->name('usuarios.show');
 
@@ -40,6 +40,16 @@ Route::middleware(
             UserController::class,
             'store'
         ])->name('usuarios.store');
+
+        Route::put('/usuarios', [
+            UserController::class,
+            'update'
+        ])->name('usuarios.update');
+
+        Route::delete('usuarios/{id}', [
+            UserController::class,
+            'destroy'
+        ])->name('usuarios.destroy');
 
         // Medicos
         Route::get('/medicos', [

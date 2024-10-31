@@ -12,6 +12,22 @@ class MedicoController extends Controller
         // Retorna todos os médicos no formato JSON
         return response()->json(Medico::all(), 200);
     }
+    
+    public function show($id)
+    {
+        // Exibe um medico específico
+        // Busca o medico pelo ID
+        $medico = Medico::find($id);
+
+        // Verifica se o medico foi encontrado
+        if (!$medico) {
+            return response()->json(
+                ['message' => 'Não encontrado'], 404);
+        }
+
+        // Retorna o medico em formato JSON
+        return response()->json($medico, 200);
+    }
 
     public function store(Request $request)
     {
@@ -28,22 +44,6 @@ class MedicoController extends Controller
         ]);
 
         return response(['Sucesso!'], 200);
-    }
-
-    public function show($id)
-    {
-        // Exibe um medico específico
-        // Busca o medico pelo ID
-        $medico = Medico::find($id);
-
-        // Verifica se o medico foi encontrado
-        if (!$medico) {
-            return response()->json(
-                ['message' => 'Não encontrado'], 404);
-        }
-
-        // Retorna o medico em formato JSON
-        return response()->json($medico, 200);
     }
 
     public function update(Request $request)
