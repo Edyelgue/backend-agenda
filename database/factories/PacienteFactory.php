@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +19,12 @@ class PacienteFactory extends Factory
     {
         return [
             'nome' => $this->faker->name,
-            'data_nascimento' => $this->faker->date('d/m/Y', '01/01/2000'),
+            'data_nascimento' => $this->faker->date(
+                Carbon::createFromFormat(
+                    'Y-m-d',
+                    $this->faker->date()
+                )
+            ),
             'sexo' => $this->faker->randomElement(['M', 'F']),
             'telefone' => $this->faker->phoneNumber(),
             'email' => $this->faker->unique()->safeEmail,

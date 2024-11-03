@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Paciente;
+use Carbon\Carbon;
 
 class PacienteController extends Controller
 {
@@ -37,7 +38,10 @@ class PacienteController extends Controller
         // Armazena um novo paciente
         Paciente::create([
             'nome' => $request->nome,
-            'data_nascimento' => $request->data_nascimento,
+            'data_nascimento' => Carbon::createFromFormat(
+                'Y-m-d',
+                $request->data_nascimento
+            ),
             'sexo' => $request->sexo,
             'telefone' => $request->telefone,
             'email' => $request->email,
