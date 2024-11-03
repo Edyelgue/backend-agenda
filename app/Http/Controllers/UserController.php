@@ -56,8 +56,15 @@ class UserController extends Controller
         return response('Sucesso.', 200);
     }
 
-    public function destroy($id)
+    //Fake delete
+    public function destroy(Request $request, $id)
     {
+        $user = User::find($id);
 
+        $user->status = $request->status;
+
+        $user->save();
+
+        return response('Removido.', 200);
     }
 }

@@ -46,7 +46,7 @@ Route::middleware(
             'update'
         ])->name('usuarios.update');
 
-        Route::delete('usuarios/{id}', [
+        Route::put('usuarios/{id}', [
             UserController::class,
             'destroy'
         ])->name('usuarios.destroy');
