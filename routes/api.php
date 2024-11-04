@@ -13,6 +13,11 @@ Route::post('/login', [
     'login'
 ])->name('login');
 
+// Route::post('/usuarios', [
+//     UserController::class,
+//     'store'
+// ])->name('usuarios.store');
+
 
 // Rotas protegidas por autenticação Sanctum
 Route::middleware(

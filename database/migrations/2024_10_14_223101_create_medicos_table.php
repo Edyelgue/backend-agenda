@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\Rules\Unique;
 
 return new class extends Migration
 {
@@ -16,8 +17,8 @@ return new class extends Migration
             $table->string('nome');
             $table->string('crm')->unique();
             $table->string('especialidade');
-            $table->string('telefone');
-            $table->string('email');
+            $table->string('telefone')->unique();
+            $table->string('email')->unique();
             $table->string('endereco');
             $table->string('status');
             $table->text('obs')->nullable();
