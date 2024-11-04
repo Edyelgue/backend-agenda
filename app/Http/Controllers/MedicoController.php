@@ -35,7 +35,7 @@ class MedicoController extends Controller
     public function store(Request $request)
     {
 
-        // Faz um busca dos dados a serem cadastrados checando se há duplicidade
+        // Faz uma busca dos dados a serem cadastrados checando se há duplicidade
         if (Medico::where(
             'crm',
             $request->crm

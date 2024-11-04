@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('nome');
             $table->date('data_nascimento');
             $table->string('sexo');
-            $table->string('telefone')->unique();
-            $table->string('email')->unique();
+            $table->string('telefone');
+            $table->string('email');
             $table->string('endereco');
             $table->string('cpf')->unique();
             $table->string('rg')->unique();
