@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Paciente;
-use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 
 class PacienteController extends Controller
@@ -37,24 +36,6 @@ class PacienteController extends Controller
     public function store(Request $request)
     {
         // Faz uma busca dos dados a serem cadastrados checando se há duplicidade
-        // if (Paciente::where(
-        //     'telefone',
-        //     $request->telefone
-        // )->exists()) {
-        //     return response()->json([
-        //         'error' => 'Telefone ja possui cadastro.'
-        //     ], 409);
-        // }
-
-        // if (Paciente::where(
-        //     'email',
-        //     $request->email
-        // )->exists()) {
-        //     return response()->json([
-        //         'error'=> 'Email ja possui cadastro.'
-        //     ], 409);
-        // }
-
         if (Paciente::where(
             'cpf',
             $request->cpf
@@ -77,10 +58,7 @@ class PacienteController extends Controller
             // Armazena um novo paciente
             Paciente::create([
                 'nome' => $request->nome,
-                'data_nascimento' => Carbon::createFromFormat(
-                    'Y-m-d',
-                    $request->data_nascimento
-                ),
+                'data_nascimento' => $request->data_nascimento,
                 'sexo' => $request->sexo,
                 'telefone' => $request->telefone,
                 'email' => $request->email,
@@ -92,6 +70,10 @@ class PacienteController extends Controller
 
             return response(['Paciente cadastrado com sucesso!'], 200);
         } catch (QueryException $e) {
+
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
         }
     }
 

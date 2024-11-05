@@ -7,10 +7,8 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function index() 
+    public function index()
     {
-        $users = User::all();
-
         return response()->json(User::all());
     }
 
@@ -21,12 +19,33 @@ class UserController extends Controller
         if (!empty($user)) {
             return response()->json($user);
         } else {
-            return response()->json(['message' => 'Usuário não encontrado.'], 404);
+            return response()->json([
+                'message' => 'Usuário não encontrado.'
+            ], 404);
         }
     }
 
     public function store(Request $request)
     {
+        // Faz uma busca dos dados a serem cadastrados checando se há duplicidade
+        if (User::where(
+            'name',
+            $request->name
+        )->exists()) {
+            return response()->json([
+                'error' => 'Nome ja existe.'
+            ], 409);
+        }
+
+        if (User::where(
+            'email',
+            $request->email
+        )->exists()) {
+            return response()->json([
+                'error' => 'Email ja existe.'
+            ], 409);
+        }
+
         try {
             // Criação do usuário
             User::create([
@@ -36,10 +55,15 @@ class UserController extends Controller
             ]);
 
             // Retorna mensagem de sucesso
-            return back()->with('success', 'Usuário criado com sucesso!');
+            return back()->with(
+                'success',
+                'Usuário criado com sucesso!'
+            );
         } catch (\Exception $e) {
             // Tratamento de exceção e retorno de mensagem de erro
-            return back()->withErrors(['error' => 'Erro ao criar usuário. Tente novamente.']);
+            return back()->withErrors([
+                'error' => $e->getMessage()
+            ]);
         }
     }
 

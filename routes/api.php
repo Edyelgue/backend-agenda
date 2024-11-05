@@ -60,44 +60,48 @@ Route::middleware(
         Route::get('/medicos', [
             MedicoController::class,
             'index'
-        ]);
+        ])->name('medicos.index');
+
         Route::get('/medicos/{id}', [
             MedicoController::class,
             'show'
-        ]);
+        ])->name('medicos.show');
+
         Route::post('/medicos', [
             MedicoController::class,
             'store'
-        ]);
+        ])->name('medicos.store');
+
         Route::put('/medicos/{id}', [
             MedicoController::class,
             'update'
-        ]);
+        ])->name('medicos.update');
+
         Route::delete('/medicos/{id}', [
             MedicoController::class,
             'destroy'
-        ]);
+        ])->name('medicos.destroy');
 
         // Pacientes
         Route::get('/pacientes', [
             PacienteController::class,
             'index'
-        ]);
+        ])->name('pacientes.index');
         Route::get('/pacientes/{id}', [
             PacienteController::class,
             'show'
-        ]);
+        ])->name('pacientes.show');
         Route::post('/pacientes', [
             PacienteController::class,
             'store'
-        ]);
+        ])->name('pacientes.store');
         Route::put('/pacientes/{id}', [
             PacienteController::class,
             'update'
-        ]);
+        ])->name('pacientes.update');
         Route::delete('/pacientes/{id}', [
             PacienteController::class,
             'destroy'
-        ]);
+        ])->name('pacientes.destroy');
     }
 );
