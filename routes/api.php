@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MedicoController;
@@ -13,24 +14,31 @@ Route::post('/login', [
     'login'
 ])->name('login');
 
-// Route::post('/usuarios', [
-//     UserController::class,
-//     'store'
-// ])->name('usuarios.store');
+Route::post('/usuarios', [
+    UserController::class,
+    'store'
+])->name('usuarios.store');
+
 
 
 // Rotas protegidas por autenticação Sanctum
 Route::middleware(
     'auth:sanctum'
-    )->group(
-        function () {
-            
+)->group(
+    function () {
+
+        // Agendamentos
+        Route::post('/agenda', [
+            AgendamentoController::class,
+            'store'
+        ])->name('agenda.store');
+
         //  Realizar logout
         Route::post('/logout', [
             AuthController::class,
             'logout'
         ]);
-        
+
         // Usuarios
         Route::get('/usuarios', [
             UserController::class,
@@ -38,13 +46,14 @@ Route::middleware(
         ]);
 
         Route::get('/usuarios/{id}', [
-            UserController::class, 'show'
+            UserController::class,
+            'show'
         ])->name('usuarios.show');
 
-        Route::post('/usuarios', [
-            UserController::class,
-            'store'
-        ])->name('usuarios.store');
+        // Route::post('/usuarios', [
+        //     UserController::class,
+        //     'store'
+        // ])->name('usuarios.store');
 
         Route::put('/usuarios', [
             UserController::class,
