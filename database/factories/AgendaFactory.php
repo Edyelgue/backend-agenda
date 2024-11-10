@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Agendamento>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Agenda>
  */
-class AgendamentoFactory extends Factory
+class AgendaFactory extends Factory
 {
     /**
      * Define the model's default state.

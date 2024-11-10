@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AgendamentoController;
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MedicoController;
@@ -27,11 +27,31 @@ Route::middleware(
 )->group(
     function () {
 
-        // Agendamentos
+        // Agenda
+        Route::get('/agenda', [
+            AgendaController::class,
+            'index'
+        ])->name('agenda.index');
+
+        Route::get('/agenda/{id}', [
+            AgendaController::class,
+            'show'
+        ])->name('agenda.show');
+
         Route::post('/agenda', [
-            AgendamentoController::class,
+            AgendaController::class,
             'store'
         ])->name('agenda.store');
+
+        Route::put('/agenda/{id}', [
+            AgendaController::class,
+            'update'
+        ])->name('agenda.update');
+
+        Route::delete('/agenda/{id}', [
+            AgendaController::class,
+            'destroy'
+        ])->name('agenda.destroy');
 
         //  Realizar logout
         Route::post('/logout', [

@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Agendamento extends Model
+class Agenda extends Model
 {
     use HasFactory;
+
+    // Nome da tabela no banco de dados
+    protected $table = 'agenda';
 
     protected $fillable = [
         'user_id',

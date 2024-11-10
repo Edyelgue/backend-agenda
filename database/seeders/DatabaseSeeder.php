@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Agendamento;
+use App\Models\Agenda;
 use App\Models\Medico;
 use App\Models\Paciente;
 use App\Models\User;
@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
         User::factory(5)->create();
         Medico::factory(5)->create();
         Paciente::factory(5)->create();
-        Agendamento::factory(5)->create();
+        Agenda::factory(5)->create();
     }
 }
