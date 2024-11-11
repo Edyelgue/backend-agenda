@@ -79,11 +79,19 @@ class AgendaController extends Controller
 
             $agendamento->save();
 
-            return response('Sucesso', 201);
+            return response('Sucesso.', 201);
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-    public function destroy($id) {}
+    public function destroy($id) 
+    {
+        // Remove um agendamento específico
+        $agendamento = Agenda::find($id);
+        $agendamento->delete();
+
+        return response('Removido.',200);
+    }
 }
+ 
